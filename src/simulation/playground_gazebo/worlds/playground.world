@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="playground">
+    
+    <!-- Ground and lighting -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Camera view -->
+    <gui>
+      <camera name="user_camera">
+        <pose>17.34 -12.43 10.92 0 0.44 2.42</pose> <!-- x y z roll pitch yaw -->
+      </camera>
+    </gui>
+
+    <!-- Tunnel model -->
+    <model name="test_site">
+      <static>true</static>
+      <link name="test_site_link">
+        <pose>-7.85 0 2.45 -1.570796327 0 0</pose>
+        <collision name="site_collision">
+          <geometry>
+            <mesh>
+              <uri>file://test_site_tunnel.STL</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="site_visual">
+          <geometry>
+            <mesh>
+              <uri>file://test_site_tunnel.STL</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <model name="tunnel_overlay_box">
+  <static>true</static>
+  <link name="link">
+    <visual name="visual">
+      <geometry>
+        <box>
+          <size>16 8 0.01</size> <!-- width (x), depth (y), height -->
+        </box>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Red</name>
+        </script>
+        <ambient>1 0 0 0.5</ambient>     <!-- red color -->
+        <diffuse>1 0 0 0.5</diffuse>     <!-- semi-transparent -->
+      </material>
+    </visual>
+    <pose>0 4.0 0.01 0 0 0</pose> <!-- center of the box -->
+  </link>
+</model>
+
+
+
+  </world>
+</sdf>
+

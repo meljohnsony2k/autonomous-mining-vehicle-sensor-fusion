@@ -1,0 +1,35 @@
+<launch>
+  <param name="use_sim_time" value="true"/>
+
+  <!-- UKF Node -->
+  <node pkg="robot_localization" type="ukf_localization_node" name="ukf_localization_node" output="screen">
+    <rosparam command="load" file="$(find fusion)/config/ukf.yaml"/>
+    <param name="print_diagnostics" value="true" />
+  </node>
+
+  <!-- Filtered NavSat Transform Node -->
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" output="screen">
+    <param name="zero_altitude" value="true"/>
+    <param name="broadcast_utm_transform" value="false"/>
+    <param name="use_odometry_yaw" value="false"/>
+    <param name="wait_for_datum" value="false"/>
+
+    <remap from="/gps/fix" to="/filtered_navsat/fix"/>
+    <remap from="/imu/data" to="/imu"/>
+    <remap from="/odometry/gps" to="/odometry/gps"/>
+  </node>
+
+  <!-- Second node for ground truth navsat -->
+  <!--
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_gt_node" output="screen" ns="ground_truth">
+    <param name="zero_altitude" value="true"/>
+    <param name="broadcast_utm_transform" value="false"/>
+    <param name="use_odometry_yaw" value="false"/>
+    <param name="wait_for_datum" value="false"/>
+    <remap from="/gps/fix" to="/navsat/fix"/>
+    <remap from="/imu/data" to="/imu"/> 
+    <remap from="/odometry/gps" to="/odometry/gps_gt"/>
+  </node>
+  -->
+  
+</launch>

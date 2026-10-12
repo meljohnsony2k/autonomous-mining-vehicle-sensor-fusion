@@ -1,0 +1,17 @@
+build/
+devel/
+install/
+logs/
+*.pyc
+*.log
+*.swp
+*.swo
+*.~*
+*.bak
+.DS_Store
+.cproject
+.settings/
+.idea/
+.vscode/
+.catkin_workspace
+
